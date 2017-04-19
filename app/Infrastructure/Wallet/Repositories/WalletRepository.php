@@ -2,12 +2,11 @@
 
 namespace App\Wallet\Infrastructure\Repositories;
 
-use App\Wallet as WalletModel;
-use Illuminate\Support\Facades\DB;
+use App\Domain\Wallet\Domain\ValueObjects\Currency\Currency;
+use App\Domain\Wallet\Entities\Wallet\Wallet;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
-use App\Domain\Entities\Wallet\Wallet;
 use App\Wallet\Domain\Repositories\WalletRepository as WalletRepositoryContract;
-use League\Flysystem\Exception;
 
 class WalletRepository implements WalletRepositoryContract
 {
@@ -16,22 +15,11 @@ class WalletRepository implements WalletRepositoryContract
      */
     public function create(Request $request)
     {
-        DB::beginTransaction();
-        try {
+        Auth::user();
+        $userId = (int)Auth::id();
 
-            $wallet = new WalletModel();
-            $wallet->UserID = $request->UserID;
-            $wallet->currency = $request->Currency;
-            $wallet->Name = $request->Name;
-            $wallet->Amount = $request->Amount;
-            $wallet->Transactions = $request->Transactions;
-            $wallet->Pin = $request->Pin;
-            $wallet->save();
-            DB::commit();
-        } catch (Exception $e) {
-            DB::rollBack();
-            throw $e;
+        $currency = new Currency('PLN');
 
-        }
+        return Wallet::create($userId, $currency, $request->input('name'));
     }
 }

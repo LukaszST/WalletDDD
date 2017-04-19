@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Domain\Entities\Wallet\Wallet;
-use App\Http\Middleware\RedirectIfAuthenticated;
 use Illuminate\Http\Request;
 use App\Wallet\Infrastructure\Repositories\WalletRepository as WalletRepositoryContract;
 

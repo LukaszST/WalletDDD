@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index');
 
 Route::post('/create-wallet', 'WalletController@create');
+
+Route::post('/make-income', 'TransactionsController@income');
+
+Route::post('/make-expense', 'TransactionsController@expense');
