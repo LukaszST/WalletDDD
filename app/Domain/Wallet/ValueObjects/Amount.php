@@ -18,7 +18,7 @@ class Amount
 
     private function disallowInvalidAmount($amount, $type)
     {
-        if (!is_numeric($amount)) {
+        if (!is_numeric($amount) && $type = null) {
             throw new InvalidArgumentException('Amount is not numeric');
         }
 
