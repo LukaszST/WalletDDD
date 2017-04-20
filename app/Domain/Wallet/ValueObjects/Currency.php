@@ -14,13 +14,13 @@ class Currency
      */
     public function __construct($currency)
     {
-        $this->dissallowCurrencyString($currency);
+        $this->disallowCurrency($currency);
         $this->currency = $currency;
     }
 
-    private function dissallowCurrencyString($currency)
+    private function disallowCurrency($currency)
     {
-        if (!in_array($currency, ['PLN'])) {
+        if (!in_array($currency, ['PLN', 'EUR'])) {
             throw new Exception('This currency is not supported');
         }
     }

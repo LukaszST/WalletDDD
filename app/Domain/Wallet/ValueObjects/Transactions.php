@@ -1,32 +1,39 @@
 <?php
 
-namespace App\Domain\Wallet\Domain\ValueObjects\Transactions;
+namespace App\Domain\Wallet\ValueObjects\Transactions;
 
-use Doctrine\Instantiator\Exception\InvalidArgumentException;
+use App\Domain\Wallet\Domain\ValueObjects\Currency\Currency;
+use App\Domain\Wallet\ValueObjects\Amount\Amount;
+use Illuminate\Database\Eloquent\Model;
 
-class Transactions
+class Transactions extends Model
 {
-    private $transactions;
+    protected $table = 'transactions';
+
+    const INCOME = 'income';
+    const EXPENSE = 'expense';
+
+    public $timestamps = true;
+
+    protected $fillable = ['UserID', 'Type', 'WalletID', 'Currency', 'Amount', 'Name'];
 
     /**
-     * Transactions constructor.
-     * @param $transactions
+     * @param string $UserID
+     * @param Currency $Currency
+     * @param string $Name
+     * @return mixed
      */
-    public function __construct($transactions)
+    public static function make(
+        string $UserID,
+        string $Type,
+        int $WalletID,
+        Currency $Currency,
+        Amount $Amount,
+        string $Name
+    )
     {
-        $this->dissalowTransactions($transactions);
-        $this->transactions = $transactions;
-    }
+        $transaction = new static(compact('UserID', 'Type', 'WalletID', 'Currency', 'Amount', 'Name'));
 
-    private function dissalowTransactions($transactions)
-    {
-        if ($transactions < 0) {
-            throw new InvalidArgumentException('Transactions can\'t be bellowe zero');
-        }
-    }
-
-    function __toString()
-    {
-        return strval($this->transactions);
+        return $transaction->save();
     }
 }

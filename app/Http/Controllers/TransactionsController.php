@@ -3,28 +3,35 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Wallet\Infrastructure\Repositories\TransactionsRepository as TransactionsRepositoryContract;
 
+/**
+ * Class TransactionsController
+ * @package App\Http\Controllers
+ */
 class TransactionsController extends Controller
 {
 
-    private $transactionRepositry;
+    /**
+     * @var TransactionsRepositoryContract
+     */
+    private $transactionsRepository;
+
 
     /**
      * TransactionsController constructor.
-     * @param $transactionRepositry
+     * @param TransactionsRepositoryContract $transactionsRepository
      */
-    public function __construct($transactionRepositry)
+    public function __construct(TransactionsRepositoryContract $transactionsRepository)
     {
-        $this->transactionRepositry = $transactionRepositry;
+        $this->transactionsRepository = $transactionsRepository;
     }
 
-    public function expense(Request $request)
+    /**
+     * @param Request $request
+     */
+    public function make(Request $request)
     {
-        $expense = $this->transactionRepositry();
-    }
-
-    public function income(Request $request)
-    {
-        
+        $transaction = $this->transactionsRepository->make($request);;
     }
 }

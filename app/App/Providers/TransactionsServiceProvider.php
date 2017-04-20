@@ -23,6 +23,6 @@ class TransactionsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('TransactionsRepositoryContract', 'TransactionsRepository.php');
+        $this->app->bind('TransactionsRepositoryContract', 'TransactionsRepository');
     }
 }

@@ -18,7 +18,7 @@ class WalletRepository implements WalletRepositoryContract
         Auth::user();
         $userId = (int)Auth::id();
 
-        $currency = new Currency('PLN');
+        $currency = new Currency($request->input('currency'));
 
         return Wallet::create($userId, $currency, $request->input('name'));
     }
