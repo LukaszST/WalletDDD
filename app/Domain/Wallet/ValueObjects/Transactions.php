@@ -4,7 +4,9 @@ namespace App\Domain\Wallet\ValueObjects\Transactions;
 
 use App\Domain\Wallet\Domain\ValueObjects\Currency\Currency;
 use App\Domain\Wallet\ValueObjects\Amount\Amount;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\ErrorHandler\Collecting;
 
 class Transactions extends Model
 {

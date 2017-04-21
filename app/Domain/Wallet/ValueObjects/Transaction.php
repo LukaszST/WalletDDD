@@ -21,7 +21,7 @@ class Transaction
     private function dissalowTransactions($transactions)
     {
         if ($transactions < 0) {
-            throw new InvalidArgumentException('Transactions can\'t be bellowe zero');
+            throw new InvalidArgumentException('Transactions can\'t be bellow zero');
         }
     }
 

@@ -25,7 +25,7 @@ class Currency
         }
     }
 
-    function __toString()
+    function __toString(): string
     {
         return (string) $this->currency;
     }

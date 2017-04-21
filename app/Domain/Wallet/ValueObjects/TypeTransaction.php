@@ -25,7 +25,7 @@ class TypeTransaction
         }
     }
 
-    function __toString()
+    function __toString(): string
     {
         return strval($this->typeTransaction);
     }
